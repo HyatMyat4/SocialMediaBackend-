@@ -67,7 +67,7 @@ const  newMassageGroup = async (req , res) => {
 
     const MessageAllGroup = await Message.find();
     const MessageGroup =  MessageAllGroup.filter((msg) => msg.userId === userid  )
-
+    severpusher.trigger('Message', 'new-message',MessageGroup._id)
     res.status(201).json(MessageGroup)
     }catch (err) {
         res.status(409).json({message: err.message});
